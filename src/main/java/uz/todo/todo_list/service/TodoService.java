@@ -1,6 +1,5 @@
 package uz.todo.todo_list.service;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uz.todo.todo_list.dto.ToDoCreateDto;
@@ -10,12 +9,11 @@ import uz.todo.todo_list.repo.TodoRepo;
 import java.util.Optional;
 
 @Service
-public class ToDoServiceImpl implements ToDoService{
+public class TodoService {
 
     @Autowired
     TodoRepo todoRepo;
 
-    @Override
     public ToDoList addTask(ToDoCreateDto dto) {
         ToDoList toDoList = new ToDoList();
         toDoList.setName(dto.getName());
@@ -24,19 +22,15 @@ public class ToDoServiceImpl implements ToDoService{
         return toDoList;
     }
 
-    @Override
-    public void deleteTask(Long id) {
-        try {
-            todoRepo.deleteById(id);
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
+    public ToDoList deleteTask(Long id) {
+        todoRepo.deleteById(id);
+        Optional<ToDoList> byId = todoRepo.findById(id);
+        return byId.orElseGet(ToDoList::new);
     }
 
-    @Override
-    public void updateStatus(Long id) {
-        Optional<ToDoList> listId = todoRepo.findById(id);
-        ToDoList toDoList = listId.get();
-        toDoList.setStatus(true);
+
+    public ToDoList get(Long id) {
+        Optional<ToDoList> byId = todoRepo.findById(id);
+        return byId.orElseGet(ToDoList::new);
     }
 }

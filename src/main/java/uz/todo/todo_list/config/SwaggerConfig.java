@@ -30,7 +30,7 @@ public class SwaggerConfig {
                 "Some custom description of API.",
                 "API TOS",
                 "Terms of service",
-                new Contact("Amonov Abumuslim", "www.example.com", "amonovabumuslim@gmail.com"),
+                new Contact("John Doe", "www.example.com", "myeaddress@company.com"),
                 "License of API", "API license URL", Collections.emptyList());
     }
 
