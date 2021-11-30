@@ -23,9 +23,9 @@ public class TodoService {
     }
 
     public ToDoList deleteTask(Long id) {
-        todoRepo.deleteById(id);
-        Optional<ToDoList> byId = todoRepo.findById(id);
-        return byId.orElseGet(ToDoList::new);
+        ToDoList doneToDoList = todoRepo.findById(id).get();
+        doneToDoList.setStatus(true);
+        return todoRepo.save(doneToDoList);
     }
 
 

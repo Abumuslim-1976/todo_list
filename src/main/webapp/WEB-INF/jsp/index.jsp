@@ -92,7 +92,7 @@
                             "<td>" + data.description + "</td>" +
                             "<td>" + data.status + "</td>" +
                             "<td>" + data.createdAt + "</td>" +
-                            "<td>" + "<button class='btn btn-outline-success' id='btn' value='" + data.id + "'>Do</button>" + "</td>"
+                            "<td>" + "<button class='btn btn-outline-success' id='btn' value='" + data.id + "'>Done</button>" + "</td>"
                             + "</tr>";
                         $('#tBody').append(x);
                     }
@@ -112,7 +112,17 @@
             url: "/api/todo/" + btnVal,
             type: "DELETE",
             success: function (data) {
-                data.status = true;
+               if (data) {
+                   let x = "<tr>" +
+                       "<th scope='row'>" + data.id + "</th>" +
+                       "<td>" + data.name + "</td>" +
+                       "<td>" + data.description + "</td>" +
+                       "<td>" + data.status + "</td>" +
+                       "<td>" + data.createdAt + "</td>" +
+                       "<td>" + "<button class='btn btn-outline-success' id='btn' value='" + data.id + "'>Done</button>" + "</td>"
+                       + "</tr>";
+                   $('#tBody').append(x);
+               }
             },
             error: function () {
                 alert("this task is done")
